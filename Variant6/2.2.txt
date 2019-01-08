@@ -1,0 +1,51 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ConsoleApp3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Привет! Это Lab02");
+            while (true)
+            {
+                Console.Write("Введите x: ");
+                double x = double.Parse(Console.ReadLine());
+                Console.Write("Введите y: ");
+                double y = double.Parse(Console.ReadLine());
+                Task t = new Task();
+                if (t.Pop(x, y))
+                    Console.WriteLine("Поздравляю ! Попали в заштрихованную область!");
+                else
+                    Console.WriteLine("Ах! Жаль, не попали!");
+                Console.ReadLine();
+            }
+        }
+    }
+}
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ConsoleApp3
+{
+    class Task
+    {
+        double r = 3;
+        public bool Pop(double x, double y)
+        {
+            if (((x >= 0) && (y >= 0) && (Math.Pow(y, 2) + Math.Pow(x - r, 2) <= Math.Pow(r, 2))) 
+                ||((x <= 0) && (y <= 0) && (x >= -r) && (y >= -r) && (Math.Pow(y + r, 2) + Math.Pow(x + r, 2) >= Math.Pow(r, 2))))
+                return true;
+            else
+                return false;
+        }
+    }
+}

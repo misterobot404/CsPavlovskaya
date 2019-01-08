@@ -1,0 +1,110 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Введите координаты вектора №1:");
+            Console.Write("x= ");
+            double x1 = double.Parse(Console.ReadLine());
+            Console.Write("y= ");
+            double y1 = double.Parse(Console.ReadLine());
+            Console.Write("z= ");
+            double z1 = double.Parse(Console.ReadLine());
+
+            Console.WriteLine("Введите координаты вектора №2:");
+            Console.Write("x= ");
+            double x2 = double.Parse(Console.ReadLine());
+            Console.Write("y= ");
+            double y2 = double.Parse(Console.ReadLine());
+            Console.Write("z= ");
+            double z2 = double.Parse(Console.ReadLine());
+
+            Vector v1 = new Vector(x1, y1, z1);
+            Vector v2 = new Vector(x2, y2, z2);
+            Vector v3 = v1 + v2;
+            Vector v4 = v1 - v2;
+            double m = v2 * v3;
+            double c = Vector.Cos(v1, v2);
+
+            Console.WriteLine("Сложение векторов= "+v3);
+            Console.WriteLine("Вычитание векторов= "+v4);
+            Console.WriteLine("Скалярное произведение векторов= "+m);
+            Console.WriteLine("Косинус угла между векторами= "+c);
+            Console.WriteLine("Длина вектора №1= "+v1.GetLength());
+            Console.WriteLine("Длина вектора №2= " + v2.GetLength());
+            Console.ReadKey();
+        }
+    }
+}
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+    class Vector
+    {
+        private double X;
+        private double Y;
+        private double Z;
+
+        // конструктор без параметров 
+        private Vector() { }
+
+        //конструктор с параметрами
+        public Vector(double x, double y, double z)
+        {
+            X = x;
+            Y = y;
+            Z = z;
+        }
+
+        //длина вектора
+        public double GetLength()
+        {
+            return Math.Sqrt(X * X + Y * Y + Z * Z);
+        }
+
+        //операция сложения
+        public static Vector operator +(Vector l, Vector r)
+        {
+            return new Vector(l.X + r.X, l.Y + r.Y, l.Z + r.Z);
+        }
+
+        //вычитание векторов
+        public static Vector operator -(Vector l, Vector r)
+        {
+            return new Vector(l.X - r.X, l.Y - r.Y, l.Z - r.Z);
+        }
+
+        //вычисление скалярного произведения двух векторов
+        public static double operator *(Vector l, Vector r)
+        {
+            return (l.X * r.X + l.Y * r.Y + l.Z * r.Z);
+        }
+
+        //вычисление косинуса между векторыми
+        public static double Cos(Vector l, Vector r)
+        {
+            return (l * r) / (l.GetLength() * r.GetLength());
+        }
+
+        public override string ToString()
+        {
+            return string.Format("({0},{1},{2})", X, Y, Z);
+        }
+    }
+}

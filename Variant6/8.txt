@@ -1,0 +1,95 @@
+using System;
+using System.Collections.Generic;
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            HomeLibrary homeLibrary = new HomeLibrary();
+            homeLibrary.Add(new HomeLibrary { Number = 1, Author = "Ессенин", Year = 1900, Category = "Стихи" });
+            homeLibrary.Add(new HomeLibrary { Number = 2, Author = "Пушкин", Year = 1910, Category = "Рассказы" });
+            homeLibrary.Add(new HomeLibrary { Number = 3, Author = "Лермонтов", Year = 1920, Category = "Басни" });
+            homeLibrary.Add(new HomeLibrary { Number = 4, Author = "Достоевский", Year = 1910, Category = "Стихи" });
+            homeLibrary.ShowScreen();
+            Console.WriteLine("Удаляем данные о 3-ем авторе...\n");
+            homeLibrary.Remove(3 - 1);
+            homeLibrary.ShowScreen();
+            Console.WriteLine("По какому критерию будем производить поиск? (По автору-1, год издания-2, по категории-3," + "по номеру -4)");
+            int number = int.Parse(Console.ReadLine());
+            switch (number)
+            {
+                case 1:
+                    Console.WriteLine("Введите писателя");
+                    homeLibrary.Search(Console.ReadLine(), number);
+                    break;
+                case 2:
+                    Console.WriteLine("Введите год издания");
+                    homeLibrary.Search(Console.ReadLine(), number);
+                    break;
+                case 3:
+                    Console.WriteLine("Введите категорию");
+                    homeLibrary.Search(Console.ReadLine(), number);
+                    break;
+                case 4:
+                    Console.WriteLine("Введите номер книги");
+                    homeLibrary.Search(Console.ReadLine(), number);
+                    break;
+                default:
+                    Console.WriteLine("Не правильный критерий");
+                    break;
+            }
+            Console.ReadLine();
+        }
+    }
+    public class HomeLibrary
+    {
+        public int Number { get; set; }
+        public string Author { get; set; }
+        public int Year { get; set; }
+        public string Category { get; set; }
+        List<HomeLibrary> homeLibraryList = new List<HomeLibrary>();
+        public void Add(HomeLibrary homeLibrary)
+        {
+            homeLibraryList.Add(homeLibrary);
+        }
+        public void Remove(int pointer)
+        {
+            homeLibraryList.RemoveAt(pointer);
+        }
+        public override string ToString()
+        {
+            return Number + " " + Author + " " + Year + " " + Category;
+        }
+        public void ShowScreen()
+        {
+            foreach (var VARIABLE in homeLibraryList)
+            {
+                Console.WriteLine(VARIABLE.ToString());
+            }
+            Console.WriteLine("\n");
+        }
+        public void Search(string str, int number)
+        {
+            foreach (var VARIABLE in homeLibraryList)
+           {
+                if (number == 1 && VARIABLE.Author == str)
+                {
+                    Console.WriteLine(VARIABLE.ToString());
+                }
+                else if (number == 2 && VARIABLE.Year == Convert.ToInt32(str))
+                {
+                    Console.WriteLine(VARIABLE.ToString());
+                }
+                else if (number == 3 && VARIABLE.Category == str)
+                {
+                    Console.WriteLine(VARIABLE.ToString());
+                }
+                else if (number == 4 && VARIABLE.Number == Convert.ToInt32(str))
+                {
+                    Console.WriteLine(VARIABLE.ToString());
+                }
+            }
+        }
+    }
+}

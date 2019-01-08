@@ -1,0 +1,101 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using ConsoleApp1;
+
+namespace ConsoleApplication2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            
+            Console.Write("¬ведите размер массива: ");
+            int sizeArr = int.Parse(Console.ReadLine());
+
+            Mas Mass = new Mas(sizeArr);
+            Mass.showArray();
+
+            Console.WriteLine("Min={0}", Mass.minEl());
+            
+            Console.WriteLine("—умма между первым положительным и последним положительным элементом ={0}", Mass.sumBetweenFirstSecond());
+
+            Mass.sortArr();
+            Mass.showArray();
+            
+            Console.ReadLine();
+        }
+    }
+}
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ConsoleApp1
+{
+    class Mas
+    {
+        private int[] array;
+
+        public Mas(int sizeArr)
+        {
+            array = new int[sizeArr];
+            for (int i = 0; i < array.Length; i++)
+            {
+                Console.Write(string.Format("¬ведите {0}й элемент массива: ", i + 1));
+                array[i] = int.Parse(Console.ReadLine());
+            }
+        }
+
+        public void showArray()
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                Console.Write(string.Format(array[i] + " "));             
+            }
+            Console.Write("\n");
+        }
+
+        public void sortArr()
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] == 0)
+                {
+                    for (int j = i; j > 0; j--)
+                    {
+                        array[j] = array[j - 1];
+                    }
+                    array[0] = 0;
+                }
+            }
+        }
+
+        public int minEl()
+        {
+            int min_elem = array.Min();
+            return min_elem;
+        }
+
+        public int sumBetweenFirstSecond()
+        {
+            int first_index = 0;
+            int last_intex = array.Length - 1;
+
+            //нахождение индексов элементов
+            for (int i = 0; i < array.Length; i++)
+            {
+                if ((array[i] < 0) && (first_index == 0)) first_index++;
+                if ((array[array.Length - i - 1] < 0) && (last_intex == array.Length)) last_intex--;
+            }
+            int sum = 0;
+            for (int i = first_index; i < last_intex; i++)
+                sum += array[i];
+            return sum;
+        }
+    }
+}

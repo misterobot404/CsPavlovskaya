@@ -1,0 +1,85 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Привет! Это Lab02");
+            while (true)
+            {
+                Console.Write("Введите значение аргумента: ");
+                double x = double.Parse(Console.ReadLine());
+                Console.Write("Введите значение величины R: ");
+                double r = double.Parse(Console.ReadLine());
+                Task t = new Task();
+                if (t.Pop(x,r))
+                {
+                    Console.Write("Значение функции= ");
+                    Console.WriteLine(t.GetDate());
+                }
+                else
+                    Console.WriteLine("Неправильное значение аргумента");
+                Console.ReadLine();
+            }
+         }
+    }
+}
+  
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+    class Task
+    {
+        double y = 0;
+        public bool Pop(double x, double r)
+        {
+            if (-8 <= x && x <= -5)
+            {
+                y = 3;
+                return true;
+            }
+            else if (-5 <= x && x <= -3)
+            {
+                y = x + 3;
+                return true;
+            }
+            else if (-3 <= x && x <= 3)
+            {
+                y = Math.Sqrt(Math.Pow(r, 2) - Math.Pow(x, 2));
+                return true;
+            }
+            else if (3 <= x && x <= 8)
+            {
+                y = -x + 5;
+                return true;
+            }
+            else if (8 <= x && x <= 10)
+            {
+                y = r;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public double GetDate()
+        {
+            return y;
+        }
+    }
+}

@@ -1,0 +1,25 @@
+using System;
+using System.IO;
+using System.Linq;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine(" Введите название файла");
+            string fileName = Console.ReadLine();
+            FileStream stream = new FileStream(fileName, FileMode.Open);
+            StreamReader reader = new StreamReader(stream);
+            string text = reader.ReadToEnd();
+            string[] sentences = text.Split(new[] { '.', '!', '?' });
+            foreach (string sentence in sentences)
+            {
+                if (!sentence.Contains(','))
+                    Console.WriteLine(sentence.Trim());
+            }
+            Console.ReadLine();
+        }
+    }
+}

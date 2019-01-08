@@ -1,0 +1,125 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ConsoleApp2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Введите кол-во столбцов");
+            int y = int.Parse(Console.ReadLine());
+            Console.WriteLine("Введите кол-во строк");
+            int z = int.Parse(Console.ReadLine());
+            int[,] mas = new int[z, y];
+            Mas2.matrix(mas, z, y); //матрица
+            Console.Write("\n");
+            Mas2.ishod(mas, z, y);      //вывод исходной матрицы
+            Console.Write("\n");
+            Mas2.minuselement(mas, z, y); //поиск элементов меньше 0 и вывод их на экран
+            Console.Write("\n");
+            Mas2.sedltoch(mas, z, y); //поиск седловых точек
+            Console.ReadLine();
+
+        }
+    }
+}
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ConsoleApp2
+{
+    public class Mas2
+    {
+        public static void matrix(int[,] s, int stlb, int strk) //матрица
+        {
+            Random rand = new Random();
+            for (int j = 0; j < strk; j++)
+            {
+                for (int i = 0; i < stlb; i++)
+                {
+                    s[j, i] = rand.Next(-10, 10);
+                }
+            }
+        }
+        public static void ishod(int[,] s, int stlb, int strk)
+        {
+            for (int j = 0; j < strk; j++)
+            {
+                for (int i = 0; i < stlb; i++)
+                {
+                    Console.Write(String.Format(" {0}", s[j, i]));
+                }
+                Console.Write("\n");
+            }
+
+        }
+        public static void minuselement(int[,] s, int stlb, int strk) //поиск элементов меньше 0 и вывод их на экран
+        {
+
+            Console.WriteLine("Сумма элементов в строках:");
+            for (int j = 0; j < strk; j++)
+            {
+                int k = 0;
+                for (int i = 0; i < stlb; i++)
+                {
+                    if (s[j, i] < 0)
+                    { for (int q = 0; q < stlb; q++)
+                        {
+                            k = k + s[j, q];
+                        }
+                        Console.WriteLine(String.Format("Номер строки: {0} Сумма элементов: {1}", j + 1, k));
+                        break;
+                    }
+                }
+
+            }
+        }
+
+        public static void sedltoch(int[,] s, int stlb, int strk)
+        {
+            int k = 0;
+            Console.WriteLine("Седловые точки:");
+            for (int j = 0; j < strk; j++)
+            {
+                int imin = 0, jmin = 0, min = 11, imax = 0, jmax = 0, max = -11;
+
+                for (int i = 0; i < stlb; i++)
+                {
+                    if (s[j, i] < min)
+                    {
+                        min = s[j, i]; imin = i; jmin = j;
+                    }
+                }
+                //минимальный элемент в строке
+                for (int o = 0; o < strk; o++)
+                {
+                    if (s[o, imin] > max)
+                    {
+                        max = s[o, imin]; imax = imin; jmax = o;
+                    }
+                } 
+                //максимальный элемент в данном столбце
+                if (s[jmin, imin] == s[jmax, imax])
+                {
+                    k = 1; Console.WriteLine(String.Format("A{0}{1} - седловая точка", jmin + 1, imin + 1));
+                }    
+            }
+            //сравнение этих элементов
+            if (k == 0)
+            {
+                Console.WriteLine("Таких точек нет");
+            }
+        }
+    }
+}
+
+

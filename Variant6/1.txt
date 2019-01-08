@@ -1,0 +1,43 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Lab01
+{
+    class Program01
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Привет! Это Lab01");
+            Console.Write("Введите а: ");
+            Class01_1 cl01 = new Class01_1();
+            double a = double.Parse(Console.ReadLine());
+            Console.WriteLine("Z1({0})={1}\nZ2({0})={2}", a, cl01.Z1(a), cl01.Z2(a));
+            Console.ReadLine();
+        }
+    }
+}
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Lab01
+{
+    public class Class01_1
+    {
+        public double Z1(double a)
+        {
+            
+            return Math.Cos(a) + Math.Cos(2*a) + Math.Cos(6*a) + Math.Cos(7*a);
+        }
+
+        public double Z2(double a)
+        {
+            return 4 * Math.Cos(a / 2) * Math.Cos((5.0 / 2.0) * a) * Math.Cos(4 * a);
+        }
+    }
+}
